@@ -14,7 +14,7 @@ compose = "1.6.2"
 compose-plugin = "1.6.0"
 junit = "4.13.2"
 kotlin = "1.9.22"
-ktor-client = "2.3.8"
+ktor-client = "3.0.0-wasm2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -36,6 +36,12 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor-client" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-client" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-client" }
+ktor-client-core-js = { module = "io.ktor:ktor-client-core-js", version.ref = "ktor-client" }
+ktor-client-core-json-js = { module = "io.ktor:ktor-client-core-json-js", version.ref = "ktor-client" }
+ktor-client-core-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor-client" }
+ktor-client-core-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor-client" }
+
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

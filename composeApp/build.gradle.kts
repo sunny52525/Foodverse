@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    kotlin("plugin.serialization") version "1.9.10"
+
 }
 
 kotlin {
@@ -25,7 +27,7 @@ kotlin {
         }
         binaries.executable()
     }
-    
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -33,9 +35,9 @@ kotlin {
             }
         }
     }
-    
+
     jvm("desktop")
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -46,13 +48,14 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.core.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -61,6 +64,27 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.ktor.client.core)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.encoding)
+            implementation("io.coil-kt.coil3:coil-compose:3.0.0-alpha05")
+            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha05")
+        }
+        desktopMain.dependencies {
+            implementation(libs.ktor.client.core.cio)
+            implementation(compose.desktop.currentOs)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.0")
+
+        }
+        jsMain.dependencies {
+            implementation(libs.ktor.client.core.js)
+//            implementation(libs.ktor.client.core.json.js)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
