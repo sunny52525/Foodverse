@@ -72,6 +72,18 @@ kotlin {
             implementation(libs.ktor.client.encoding)
             implementation("io.coil-kt.coil3:coil-compose:3.0.0-alpha05")
             implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha05")
+            // Multiplatform
+            val voyagerVersion = "1.1.0-alpha03"
+
+            implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
+            // Screen Model
+            implementation("cafe.adriel.voyager:voyager-screenmodel:$voyagerVersion")
+            // BottomSheetNavigator
+            implementation("cafe.adriel.voyager:voyager-bottom-sheet-navigator:$voyagerVersion")
+            // TabNavigator
+            implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
+            // Transitions
+            implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
         }
         desktopMain.dependencies {
             implementation(libs.ktor.client.core.cio)

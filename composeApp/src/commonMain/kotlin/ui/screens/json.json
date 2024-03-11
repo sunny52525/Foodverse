@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "text": "English - English",
+        "code": "en",
+        "ttsCode": "en-IN"
+    },
+    {
+        "id": 2,
+        "text": "हिंदी - Hindi",
+        "code": "hi",
+        "ttsCode": "hi-IN"
+    },
+    {
+        "id": 3,
+        "text": "தமிழ் - Tamil",
+        "code": "ta",
+        "ttsCode": "en-US"
+    },
+    {
+        "id": 4,
+        "text": "বাংলা - Bangla",
+        "code": "bn"
+    },
+    {
+        "id": 5,
+        "text": "ಕನ್ನಡ - Kannada",
+        "code": "kn"
+    },
+    {
+        "id": 6,
+        "text": "മലയാളം - Malyalam",
+        "code": "ml"
+    },
+    {
+        
+    }
+]

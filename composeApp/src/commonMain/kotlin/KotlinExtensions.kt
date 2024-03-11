@@ -1,3 +1,5 @@
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -26,5 +28,25 @@ suspend fun <T> safeRun(block: suspend () -> T): Result<T> {
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+}
+
+@Composable
+fun SupportedPlatforms.getAlignmentHorizontal(): Alignment.Horizontal {
+    return when (this) {
+        SupportedPlatforms.IOS -> Alignment.Start
+        SupportedPlatforms.ANDROID -> Alignment.Start
+        SupportedPlatforms.DESKTOP -> Alignment.CenterHorizontally
+        SupportedPlatforms.WEB -> Alignment.CenterHorizontally
+    }
+}
+
+@Composable
+fun SupportedPlatforms.getAlignment(): Alignment {
+    return when (this) {
+        SupportedPlatforms.IOS -> Alignment.TopStart
+        SupportedPlatforms.ANDROID -> Alignment.TopStart
+        SupportedPlatforms.DESKTOP -> Alignment.TopCenter
+        SupportedPlatforms.WEB -> Alignment.TopCenter
     }
 }

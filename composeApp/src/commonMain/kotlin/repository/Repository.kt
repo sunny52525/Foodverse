@@ -50,11 +50,27 @@ class Repository() {
             }
         }
     }
+
     suspend fun filterMeals(filter: String): Result<Meals> {
         return safeRun<Meals> {
             client.makeGet<Meals>("/filter.php") {
                 url {
                     parameters.append("c", filter)
+                }
+            }
+        }
+    }
+
+    suspend fun fetchRandomMeal(): Result<Meals> {
+        return safeRun<Meals> {
+            client.makeGet<Meals>("/random.php")
+        }
+    }
+    suspend fun fetchMealByID(id:String): Result<Meals> {
+        return safeRun<Meals> {
+            client.makeGet<Meals>("/lookup.php"){
+                url {
+                    parameters.append("i", id)
                 }
             }
         }

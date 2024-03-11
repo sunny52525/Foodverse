@@ -25,7 +25,7 @@ import org.jetbrains.compose.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun Pills(title: String = "Chicken", isSelected: Boolean = false, onClick: (title: String) -> Unit) {
+fun Pills(title: String = "Chicken", isSelected: Boolean = false, onClick: (title: String) -> Unit = {}) {
     val backgroundColor = animateColorAsState(
         targetValue = if (isSelected) Colors.colorPrimary else Color.White,
         animationSpec = tween(durationMillis = 500)

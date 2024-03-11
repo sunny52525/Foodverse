@@ -1,6 +1,8 @@
 package viewmodel
 
 import Constants
+import cafe.adriel.voyager.core.model.ScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -15,9 +17,9 @@ import model.Meals
 import orEmpty
 import repository.Repository
 import foodverse.composeapp.generated.resources.Res
+import repository.RequestResult
 
-class DishViewModel {
-    private val scope = MainScope()
+class DishViewModel : ScreenModel {
     private val repository = Repository()
 
     private val _uiState = MutableStateFlow(HomeScreenUIState())
@@ -31,6 +33,8 @@ class DishViewModel {
 
     var selectedID: MutableStateFlow<String?> = MutableStateFlow("")
 
+    private var _dishDetail: MutableStateFlow<HomeScreenUIState> = MutableStateFlow(HomeScreenUIState(isLoading = true))
+    val dishDetail = _dishDetail.asStateFlow()
     fun setSelectedID(id: String?) {
         selectedID.update {
             id
@@ -58,7 +62,7 @@ class DishViewModel {
 
 
     fun getCategories() {
-        scope.launch {
+        screenModelScope.launch {
             val response = repository.getCategories()
             response.onSuccess { meals ->
                 _categoryUiState.update {
@@ -72,7 +76,7 @@ class DishViewModel {
         _uiState.update {
             it.copy(isLoading = true)
         }
-        scope.launch {
+        screenModelScope.launch {
             val response = repository.searchMeals(query)
             response.onSuccess { meals ->
                 _uiState.update {
@@ -91,7 +95,7 @@ class DishViewModel {
             it.copy(isLoading = true)
         }
 
-        scope.launch {
+        screenModelScope.launch {
             val range = Constants.aToZValue.firstOrNull { selectedRange == it.first }?.second
             val deferred = range?.map {
                 async {
@@ -117,12 +121,49 @@ class DishViewModel {
         }
     }
 
+    fun fetchRandomDish(){
+         _dishDetail.update {
+            it.copy(isLoading = true)
+        }
+
+        screenModelScope.launch {
+            repository.fetchRandomMeal().onSuccess { meals ->
+                _dishDetail.update {
+                    it.copy(isLoading = false, uiData = meals)
+                }
+            }.onFailure { ext ->
+                _dishDetail.update {
+                    it.copy(isLoading = false, error = ext)
+                }
+            }
+        }
+    }
+
+    fun fetchMealByID(id:String){
+        _dishDetail.update {
+            it.copy(isLoading = true)
+        }
+
+        screenModelScope.launch {
+            repository.fetchMealByID(id).onSuccess { meals ->
+                _dishDetail.update {
+                    it.copy(isLoading = false, uiData = meals)
+                }
+            }.onFailure { ext ->
+                _dishDetail.update {
+                    it.copy(isLoading = false, error = ext)
+                }
+            }
+        }
+    }
+
+
     fun filter(selectedRange: String) {
         _uiState.update {
             it.copy(isLoading = true)
         }
 
-        scope.launch {
+        screenModelScope.launch {
             repository.filterMeals(selectedRange).onSuccess { meals ->
                 _uiState.update {
                     it.copy(isLoading = false, uiData = meals)

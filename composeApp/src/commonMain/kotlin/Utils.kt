@@ -27,7 +27,6 @@ object Constants {
 
 }
 
-@Composable
 fun isMobile(): Boolean {
     val platformType = getPlatformType()
     return platformType.type == SupportedPlatforms.ANDROID || platformType.type == SupportedPlatforms.IOS

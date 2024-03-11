@@ -9,3 +9,4 @@ data class HomeScreenUIState(
 data class HomeCategoryUIState(
     val uiData: Categories? = null
 )
+
