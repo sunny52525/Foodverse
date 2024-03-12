@@ -1,4 +1,12 @@
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+This repository I created to test compose multiplatform and should not be taken reference for any compose multiplatform architecture design
+
+<img width="450" alt="image" src="https://github.com/sunny52525/Foodverse/assets/30768018/6303d41e-447b-4c27-9109-2e6a9020d882">
+
+<img width="1728" alt="image" src="https://github.com/sunny52525/Foodverse/assets/30768018/46165488-73b0-43e2-a0b7-6ffd8dea6a48">
+<img width="411" alt="image" src="https://github.com/sunny52525/Foodverse/assets/30768018/b3611d79-3492-4602-860e-cda041fdabe3">
+<img width="1728" alt="image" src="https://github.com/sunny52525/Foodverse/assets/30768018/02803c1d-5166-469f-833f-90b5cfb9f5bd">
+
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
