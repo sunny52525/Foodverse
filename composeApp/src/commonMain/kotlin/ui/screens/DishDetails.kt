@@ -60,10 +60,10 @@ class DishDetails(id: String?, val viewModel: DishViewModel) : Screen {
         when {
 
             dishDetail.error != null -> {
-                ErrorScreen(dishDetail.error?.message)
+                ErrorScreen(dishDetail.error.message)
             }
 
-            dishDetail.isLoading -> LoadingScreen()
+            dishDetail.isLoading -> LoadingScreen(dishDetail.isLoading)
             dishDetail.uiData != null -> {
                 val lazyListState = rememberLazyListState()
                 val isBackVisible by derivedStateOf {

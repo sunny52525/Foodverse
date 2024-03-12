@@ -29,11 +29,9 @@ import viewmodel.DishViewModel
 @Composable
 fun App() {
     MaterialTheme {
-        val viewModel = remember { DishViewModel() }
-        Navigator(HomeScreen(viewModel)) {
+        Navigator(HomeScreen()) {
             SlideTransition(it)
         }
-//        Column(modifier = Modifier.fillMaxSize()) {  }
     }
 }
 

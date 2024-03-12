@@ -9,13 +9,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -86,16 +88,26 @@ fun Dish(
 
 @Composable
 fun DishRow(
-    meals: Meals?,
-    onCLick: (id: String) -> Unit
+    meals: List<Meal>? = null,
+    header: @Composable () -> Unit,
+    onCLick: (String?) -> Unit
 ) {
-    LazyVerticalGrid(columns = if (isMobile()) GridCells.Fixed(2) else GridCells.Adaptive(300.dp)) {
+    LazyVerticalGrid(
+        columns = if (isMobile()) GridCells.Fixed(2) else GridCells.Adaptive(300.dp),
+        modifier = Modifier.fillMaxSize()
+    ) {
+        item(span = { GridItemSpan(maxCurrentLineSpan) }) {
+            header()
+        }
 
-        meals?.meals?.forEach {
-            item {
-                Dish(Modifier, it, onCLick)
+        items(meals.orEmpty(), key = {
+            it.id ?: it
+        }) {
+            Dish(Modifier, it) {
+              onCLick(it)
             }
         }
+
     }
 
 }
@@ -137,7 +149,9 @@ fun Category(category: Category, isSelected: Boolean = false, onCLick: (String?)
 @Composable
 fun CategoryRow(category: List<Category>, selectedID: String, onCLick: (String?) -> Unit) {
     LazyRow {
-        items(category) {
+        items(category, key = {
+            it.id ?: it
+        }) {
             Column(Modifier.padding(vertical = 20.dp)) {
                 Category(it, it.name == selectedID, onCLick)
             }
@@ -186,5 +200,24 @@ fun Padding(
 ) {
     Column(Modifier.padding(paddingValues)) {
         content()
+    }
+}
+
+@Composable
+fun AppToolbar(onCLick: () -> Unit) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text("Foodverse", style = MaterialTheme.typography.h4)
+
+        IconButton(onClick = onCLick) {
+            Icon(
+                Icons
+                    .Default.Search,
+                null
+            )
+        }
     }
 }

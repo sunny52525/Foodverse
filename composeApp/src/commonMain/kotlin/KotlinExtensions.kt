@@ -50,3 +50,11 @@ fun SupportedPlatforms.getAlignment(): Alignment {
         SupportedPlatforms.WEB -> Alignment.TopCenter
     }
 }
+
+
+inline fun <T> Boolean.ifOrElse(ifValue: T, elseValue: T): T {
+    return if (this)
+        ifValue
+    else
+        elseValue
+}
