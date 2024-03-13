@@ -1,5 +1,5 @@
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
-This repository I created to test compose multiplatform and should not be taken reference for any compose multiplatform architecture design
+# This repository I created to test compose multiplatform and should not be taken reference for any compose multiplatform architecture design
 
 <img width="450" alt="image" src="https://github.com/sunny52525/Foodverse/assets/30768018/6303d41e-447b-4c27-9109-2e6a9020d882">
 
